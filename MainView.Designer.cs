@@ -1,6 +1,8 @@
-﻿namespace Zebra_LabelProfile
+﻿using Size = System.Drawing.Size;
+
+namespace Zebra_LabelProfile
 {
-    partial class Form1
+    partial class MainView
     {
         /// <summary>
         ///  Required designer variable.
@@ -31,7 +33,7 @@
             components = new System.ComponentModel.Container();
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Text = "Form1";
+            Text = "MainForm";
         }
 
         #endregion

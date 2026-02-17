@@ -1,3 +1,5 @@
+using Application = System.Windows.Forms.Application;
+
 namespace Zebra_LabelProfile
 {
     internal static class Program
@@ -10,8 +12,11 @@ namespace Zebra_LabelProfile
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
+#pragma warning disable WFO5001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
+            Application.SetColorMode(SystemColorMode.System);
+#pragma warning restore WFO5001 // Type is for evaluation purposes only and is subject to change or removal in future updates. Suppress this diagnostic to proceed.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.Run(new MainView());
         }
     }
 }
