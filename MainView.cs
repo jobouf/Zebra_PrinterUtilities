@@ -2,6 +2,7 @@ using Zebra.Sdk.Comm;
 using Zebra.Sdk.Device;
 using Zebra.Sdk.Printer;
 using Zebra.Sdk.Printer.Discovery;
+using Zebra_LabelProfile.Helpers;
 using Zebra_LabelProfile.Models;
 using Zebra_LabelProfile.Services;
 
@@ -19,6 +20,10 @@ namespace Zebra_LabelProfile
         }
         private void RefreshPrinters()
         {
+            toolStripComboBoxPrinterList.ComboBox.DataSource = UsbDiscoverer.GetZebraUsbPrinters().Select(p => new DiscoveredUsbPrinterCarrier { DiscoveredUsbPrinter = p }).ToList();
+            toolStripComboBoxPrinterList.ComboBox.DisplayMember = "FriendlyName";
+            toolStripComboBoxPrinterList.ComboBox.ValueMember = "DiscoveredUsbPrinter";
+        }
             
         private async Task GetSensorProfileAsync(DiscoveredUsbPrinterCarrier DiscoveredUsbPrinterCarrier)
             {
