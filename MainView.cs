@@ -1,6 +1,4 @@
 using Zebra.Sdk.Comm;
-using Zebra.Sdk.Device;
-using Zebra.Sdk.Printer;
 using Zebra.Sdk.Printer.Discovery;
 using Zebra_LabelProfile.Helpers;
 using Zebra_LabelProfile.Models;
@@ -24,15 +22,15 @@ namespace Zebra_LabelProfile
             toolStripComboBoxPrinterList.ComboBox.DisplayMember = "FriendlyName";
             toolStripComboBoxPrinterList.ComboBox.ValueMember = "DiscoveredUsbPrinter";
         }
-            
+
         private async Task GetSensorProfileAsync(DiscoveredUsbPrinterCarrier DiscoveredUsbPrinterCarrier)
-            {
+        {
             _sgdCommandListService.InitDefaultCommandList();
 
             Progress<int> progress = new Progress<int>();
             progress.ProgressChanged += (p, value) => toolStripProgressBarSensorProfile.Value = value;
             toolStripProgressBarSensorProfile.Maximum = _sgdCommandListService.ListLength;
-           
+
             Connection USBConnection = DiscoveredUsbPrinterCarrier.DiscoveredUsbPrinter.GetConnection();
             USBConnection.Open();
 

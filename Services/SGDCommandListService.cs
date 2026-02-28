@@ -9,7 +9,7 @@ namespace Zebra_LabelProfile.Services
     internal class SGDCommandListService : ISGDCommandListService
     {
 
-        public List<ISGDCommand> SGDCommandList {  get; set; }
+        public List<ISGDCommand> SGDCommandList { get; set; }
         public int ListProgress { get; private set; }
         public int ListLength { get { return SGDCommandList.Count; } }
 

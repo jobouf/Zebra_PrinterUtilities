@@ -10,7 +10,7 @@ namespace Zebra_LabelProfile.Services
     {
         List<ISGDCommand> SGDCommandList { get; }
         int ListProgress { get; }
-        int ListLength { get {  return SGDCommandList.Count; }  }
+        int ListLength { get { return SGDCommandList.Count; } }
         public List<ISGDCommand> InitDefaultCommandList();
         public List<ISGDCommand> ExecuteCommandList(Connection connection, IProgress<int> progress);
     }
