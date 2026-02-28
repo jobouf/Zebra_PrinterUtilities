@@ -40,6 +40,7 @@ namespace Zebra_LabelProfile
             labelLSKU = new System.Windows.Forms.Label();
             textBox2 = new TextBox();
             textBox1 = new TextBox();
+            toolStripProgressBarSensorProfile = new ToolStripProgressBar();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -48,7 +49,7 @@ namespace Zebra_LabelProfile
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripComboBoxPrinterList, toolStripButtonDiscoverPrinters, toolStripButtonStartProfile });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripComboBoxPrinterList, toolStripButtonDiscoverPrinters, toolStripButtonStartProfile, toolStripProgressBarSensorProfile });
             toolStrip1.Location = new System.Drawing.Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(800, 25);
@@ -129,6 +130,11 @@ namespace Zebra_LabelProfile
             textBox1.Size = new Size(100, 23);
             textBox1.TabIndex = 0;
             // 
+            // toolStripProgressBarSensorProfile
+            // 
+            toolStripProgressBarSensorProfile.Name = "toolStripProgressBarSensorProfile";
+            toolStripProgressBarSensorProfile.Size = new Size(100, 22);
+            // 
             // MainView
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -159,5 +165,6 @@ namespace Zebra_LabelProfile
         private TextBox textBox2;
         private TextBox textBox1;
         private System.Windows.Forms.Label labelLBatch;
+        private ToolStripProgressBar toolStripProgressBarSensorProfile;
     }
 }

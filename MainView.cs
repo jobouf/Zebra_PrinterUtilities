@@ -2,18 +2,17 @@ using Zebra.Sdk.Comm;
 using Zebra.Sdk.Device;
 using Zebra.Sdk.Printer;
 using Zebra.Sdk.Printer.Discovery;
+using Zebra_LabelProfile.Models;
 using Zebra_LabelProfile.Services;
 
 namespace Zebra_LabelProfile
 {
     public partial class MainView : Form
     {
-        
-        List<DiscoveredUsbPrinter>? discoveredUsbPrinterList;
-        private readonly IMassSGDQueryService _massSGDQueryService;
-        public MainView(IMassSGDQueryService massSGDQueryService)
+        private readonly ISGDCommandListService _sgdCommandListService;
+        public MainView(ISGDCommandListService sgdCommandListService)
         {
-            _massSGDQueryService = massSGDQueryService;
+            _sgdCommandListService = sgdCommandListService;
 
             InitializeComponent();
             RefreshPrinters();
@@ -21,23 +20,19 @@ namespace Zebra_LabelProfile
         private void RefreshPrinters()
         {
             
-            try
+        private async Task GetSensorProfileAsync(DiscoveredUsbPrinterCarrier DiscoveredUsbPrinterCarrier)
             {
-                discoveredUsbPrinterList = UsbDiscoverer.GetZebraUsbPrinters();
-            }
-            catch (ConnectionException e)
-            {
-                Console.WriteLine($"Error discovering local printers: {e.Message}");
-            }
-            toolStripComboBoxPrinterList.ComboBox.DataSource = discoveredUsbPrinterList;
-            toolStripComboBoxPrinterList.ComboBox.DisplayMember = "Address";
-        }
+            _sgdCommandListService.InitDefaultCommandList();
 
-        private void GetSensorProfile(DiscoveredUsbPrinter discoveredUsbPrinter)
-        {
-            Connection USBConnection = discoveredUsbPrinter.GetConnection();
+            Progress<int> progress = new Progress<int>();
+            progress.ProgressChanged += (p, value) => toolStripProgressBarSensorProfile.Value = value;
+            toolStripProgressBarSensorProfile.Maximum = _sgdCommandListService.ListLength;
+           
+            Connection USBConnection = DiscoveredUsbPrinterCarrier.DiscoveredUsbPrinter.GetConnection();
             USBConnection.Open();
-            _massSGDQueryService.InitializeQueryList(USBConnection);
+
+            List<ISGDCommand> QueryResults = await Task.Run(() => _sgdCommandListService.ExecuteCommandList(USBConnection, progress));
+            USBConnection.Close();
         }
 
         // Standard designer event functions
@@ -48,9 +43,7 @@ namespace Zebra_LabelProfile
 
         private void toolStripButtonStartProfile_Click(object sender, EventArgs e)
         {
-
-           var test = toolStripComboBoxPrinterList.SelectedItem;
-            GetSensorProfile((DiscoveredUsbPrinter)toolStripComboBoxPrinterList.SelectedItem);
+            GetSensorProfileAsync((DiscoveredUsbPrinterCarrier)toolStripComboBoxPrinterList.SelectedItem);
         }
     }
 }

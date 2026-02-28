@@ -30,7 +30,7 @@ namespace Zebra_LabelProfile
                 .ConfigureServices((context, services) =>
                 {
                     services.AddTransient<MainView>();
-                    services.AddSingleton<IMassSGDQueryService, MassSGDQueryService>();
+                    services.AddSingleton<ISGDCommandListService, SGDCommandListService>();
                 });
         }
     }
