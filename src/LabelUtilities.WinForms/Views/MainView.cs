@@ -1,10 +1,11 @@
+using System.ComponentModel;
 using Zebra.Sdk.Comm;
 using Zebra.Sdk.Printer.Discovery;
-using Zebra_LabelProfile.Helpers;
-using Zebra_LabelProfile.Models;
-using Zebra_LabelProfile.Services;
+using LabelUtilities.Core.Helpers;
+using LabelUtilities.Core.Models;
+using LabelUtilities.Core.Services;
 
-namespace Zebra_LabelProfile
+namespace LabelUtilities.WinForms.Views
 {
     public partial class MainView : Form
     {
@@ -16,11 +17,12 @@ namespace Zebra_LabelProfile
             InitializeComponent();
             RefreshPrinters();
         }
+
         private void RefreshPrinters()
         {
-            toolStripComboBoxPrinterList.ComboBox.DataSource = UsbDiscoverer.GetZebraUsbPrinters().Select(p => new DiscoveredUsbPrinterCarrier { DiscoveredUsbPrinter = p }).ToList();
-            toolStripComboBoxPrinterList.ComboBox.DisplayMember = "FriendlyName";
-            toolStripComboBoxPrinterList.ComboBox.ValueMember = "DiscoveredUsbPrinter";
+            printerlistToolStripComboBox.ComboBox.DataSource = UsbDiscoverer.GetZebraUsbPrinters().Select(p => new DiscoveredUsbPrinterCarrier { DiscoveredUsbPrinter = p }).ToList();
+            printerlistToolStripComboBox.ComboBox.DisplayMember = "FriendlyName";
+            printerlistToolStripComboBox.ComboBox.ValueMember = "DiscoveredUsbPrinter";
         }
 
         private async Task GetSensorProfileAsync(DiscoveredUsbPrinterCarrier DiscoveredUsbPrinterCarrier)
@@ -28,8 +30,8 @@ namespace Zebra_LabelProfile
             _sgdCommandListService.InitDefaultCommandList();
 
             Progress<int> progress = new Progress<int>();
-            progress.ProgressChanged += (p, value) => toolStripProgressBarSensorProfile.Value = value;
-            toolStripProgressBarSensorProfile.Maximum = _sgdCommandListService.ListLength;
+            progress.ProgressChanged += (p, value) => mainToolStripProgressBar.Value = value;
+            mainToolStripProgressBar.Maximum = _sgdCommandListService.ListLength;
 
             Connection USBConnection = DiscoveredUsbPrinterCarrier.DiscoveredUsbPrinter.GetConnection();
             USBConnection.Open();
@@ -46,7 +48,7 @@ namespace Zebra_LabelProfile
 
         private void toolStripButtonStartProfile_Click(object sender, EventArgs e)
         {
-            GetSensorProfileAsync((DiscoveredUsbPrinterCarrier)toolStripComboBoxPrinterList.SelectedItem);
+            GetSensorProfileAsync((DiscoveredUsbPrinterCarrier)printerlistToolStripComboBox.SelectedItem);
         }
     }
 }

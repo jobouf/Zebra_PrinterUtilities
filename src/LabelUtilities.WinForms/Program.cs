@@ -1,8 +1,13 @@
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Zebra_LabelProfile.Services;
 using Application = System.Windows.Forms.Application;
 
-namespace Zebra_LabelProfile
+using LabelUtilities.Core.Models;
+using LabelUtilities.Core.Services;
+using LabelUtilities.WinForms.Views;
+
+
+namespace LabelUtilities.WinForms
 {
     internal static class Program
     {

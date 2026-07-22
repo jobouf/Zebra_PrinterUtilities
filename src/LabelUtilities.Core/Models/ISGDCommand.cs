@@ -3,7 +3,7 @@
 
 using Zebra.Sdk.Comm;
 
-namespace Zebra_LabelProfile.Models
+namespace LabelUtilities.Core.Models
 {
     public interface ISGDCommand
     {

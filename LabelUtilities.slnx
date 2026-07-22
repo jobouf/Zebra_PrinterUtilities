@@ -7,5 +7,6 @@
     <File Path="LICENSE.txt" />
     <File Path="README.md" />
   </Folder>
-  <Project Path="src/Zebra_LabelProfile/Zebra_LabelProfile.csproj" />
+  <Project Path="src/LabelUtilities.Core/LabelUtilities.Core.csproj" />
+  <Project Path="src/LabelUtilities.WinForms/LabelUtilities.WinForms.csproj" />
 </Solution>

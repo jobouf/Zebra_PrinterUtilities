@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Zebra.Sdk.Comm;
-using Zebra_LabelProfile.Models;
+using LabelUtilities.Core.Models;
 
-namespace Zebra_LabelProfile.Services
+namespace LabelUtilities.Core.Services
 {
-    internal class SGDCommandListService : ISGDCommandListService
+    public class SGDCommandListService : ISGDCommandListService
     {
 
         public List<ISGDCommand> SGDCommandList { get; private set; }

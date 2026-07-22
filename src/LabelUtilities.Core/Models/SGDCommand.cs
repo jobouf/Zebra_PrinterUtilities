@@ -4,7 +4,7 @@
 using Zebra.Sdk.Comm;
 using Zebra.Sdk.Printer;
 
-namespace Zebra_LabelProfile.Models
+namespace LabelUtilities.Core.Models
 {
     public enum SGDType
     {
