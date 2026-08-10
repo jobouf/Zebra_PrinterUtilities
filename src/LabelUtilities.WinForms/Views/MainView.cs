@@ -1,54 +1,31 @@
-using System.ComponentModel;
-using Zebra.Sdk.Comm;
-using Zebra.Sdk.Printer.Discovery;
-using LabelUtilities.Core.Helpers;
-using LabelUtilities.Core.Models;
-using LabelUtilities.Core.Services;
+using LabelUtilities.WinForms.ViewModels;
 
 namespace LabelUtilities.WinForms.Views
 {
     public partial class MainView : Form
     {
-        private readonly ISGDCommandListService _sgdCommandListService;
-        public MainView(ISGDCommandListService sgdCommandListService)
+        private readonly MainViewModel _mainViewModel;
+        public MainView(MainViewModel mainViewModel)
         {
-            _sgdCommandListService = sgdCommandListService;
-
+            _mainViewModel = mainViewModel;
             InitializeComponent();
-            RefreshPrinters();
+            InitializeBindings();
         }
 
-        private void RefreshPrinters()
+        private void InitializeBindings()
         {
-            printerlistToolStripComboBox.ComboBox.DataSource = UsbDiscoverer.GetZebraUsbPrinters().Select(p => new DiscoveredUsbPrinterCarrier { DiscoveredUsbPrinter = p }).ToList();
-            printerlistToolStripComboBox.ComboBox.DisplayMember = "FriendlyName";
-            printerlistToolStripComboBox.ComboBox.ValueMember = "DiscoveredUsbPrinter";
-        }
+            this.DataContext = _mainViewModel;
 
-        private async Task GetSensorProfileAsync(DiscoveredUsbPrinterCarrier DiscoveredUsbPrinterCarrier)
-        {
-            _sgdCommandListService.InitDefaultCommandList();
+            mainProgressToolStripProgressBar.DataBindings.Add("Value", this.DataContext, "ProgressBarProgress", true, DataSourceUpdateMode.OnPropertyChanged);
+            mainStatusToolStripStatusLabel.DataBindings.Add("Text", this.DataContext, "ProgressBarText", true, DataSourceUpdateMode.OnPropertyChanged);
 
-            Progress<int> progress = new Progress<int>();
-            progress.ProgressChanged += (p, value) => mainToolStripProgressBar.Value = value;
-            mainToolStripProgressBar.Maximum = _sgdCommandListService.ListLength;
+            newToolStripMenuItem.Click += (s, e) => _mainViewModel.MenuNewCommand.Execute(null);
+            openToolStripMenuItem.Click += (s, e) => _mainViewModel.MenuOpenCommand.Execute(null);
+            saveToolStripMenuItem.Click += (s, e) => _mainViewModel.MenuSaveCommand.Execute(null);
+            saveAsToolStripMenuItem.Click += (s, e) => _mainViewModel.MenuSaveAsCommand.Execute(null);
+            printToolStripMenuItem.Click += (s, e) => _mainViewModel.MenuPrintCommand.Execute(null);
 
-            Connection USBConnection = DiscoveredUsbPrinterCarrier.DiscoveredUsbPrinter.GetConnection();
-            USBConnection.Open();
-
-            List<ISGDCommand> QueryResults = await Task.Run(() => _sgdCommandListService.ExecuteCommandList(USBConnection, progress));
-            USBConnection.Close();
-        }
-
-        // Standard designer event functions
-        private void toolStripButtonDiscoverPrinters_Click(object sender, EventArgs e)
-        {
-            RefreshPrinters();
-        }
-
-        private void toolStripButtonStartProfile_Click(object sender, EventArgs e)
-        {
-            GetSensorProfileAsync((DiscoveredUsbPrinterCarrier)printerlistToolStripComboBox.SelectedItem);
+            discoverPrintersToolStripButton.Click += (s, e) => _mainViewModel.ToolbarDiscoverCommand.Execute(null);
         }
     }
 }

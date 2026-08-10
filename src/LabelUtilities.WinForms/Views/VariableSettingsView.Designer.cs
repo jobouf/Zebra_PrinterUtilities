@@ -1,6 +1,6 @@
 ﻿namespace LabelUtilities.WinForms.Views
 {
-    partial class VariableDefinitionsView
+    partial class VariableSettingsView
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tableLayoutPanel1 = new TableLayoutPanel();
+            variableTableLayoutPanel = new TableLayoutPanel();
+            printerFeedPathLabel = new System.Windows.Forms.Label();
+            printerFeedPathTextBox = new TextBox();
             sampleTextBox = new TextBox();
             sampleReferenceTextBox = new TextBox();
             consumeableTextBox = new TextBox();
@@ -37,39 +39,57 @@
             consumeablelabel = new System.Windows.Forms.Label();
             consumeableReferenceLabel = new System.Windows.Forms.Label();
             labelSKUlabel = new System.Windows.Forms.Label();
-            printerFeedPathLabel = new System.Windows.Forms.Label();
-            printerFeedPathTextBox = new TextBox();
-            tableLayoutPanel1.SuspendLayout();
+            variableTableLayoutPanel.SuspendLayout();
             SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // variableTableLayoutPanel
             // 
-            tableLayoutPanel1.CellBorderStyle = TableLayoutPanelCellBorderStyle.InsetDouble;
-            tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.Controls.Add(printerFeedPathLabel, 0, 4);
-            tableLayoutPanel1.Controls.Add(printerFeedPathTextBox, 1, 4);
-            tableLayoutPanel1.Controls.Add(sampleTextBox, 1, 0);
-            tableLayoutPanel1.Controls.Add(sampleReferenceTextBox, 1, 1);
-            tableLayoutPanel1.Controls.Add(consumeableTextBox, 1, 2);
-            tableLayoutPanel1.Controls.Add(consumeableReferenceTextBox, 1, 3);
-            tableLayoutPanel1.Controls.Add(labelBatchLabel, 0, 1);
-            tableLayoutPanel1.Controls.Add(consumeablelabel, 0, 2);
-            tableLayoutPanel1.Controls.Add(consumeableReferenceLabel, 0, 3);
-            tableLayoutPanel1.Controls.Add(labelSKUlabel, 0, 0);
-            tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 6;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.Size = new System.Drawing.Size(320, 374);
-            tableLayoutPanel1.TabIndex = 20;
+            variableTableLayoutPanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.InsetDouble;
+            variableTableLayoutPanel.ColumnCount = 2;
+            variableTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            variableTableLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            variableTableLayoutPanel.Controls.Add(printerFeedPathLabel, 0, 4);
+            variableTableLayoutPanel.Controls.Add(printerFeedPathTextBox, 1, 4);
+            variableTableLayoutPanel.Controls.Add(sampleTextBox, 1, 0);
+            variableTableLayoutPanel.Controls.Add(sampleReferenceTextBox, 1, 1);
+            variableTableLayoutPanel.Controls.Add(consumeableTextBox, 1, 2);
+            variableTableLayoutPanel.Controls.Add(consumeableReferenceTextBox, 1, 3);
+            variableTableLayoutPanel.Controls.Add(labelBatchLabel, 0, 1);
+            variableTableLayoutPanel.Controls.Add(consumeablelabel, 0, 2);
+            variableTableLayoutPanel.Controls.Add(consumeableReferenceLabel, 0, 3);
+            variableTableLayoutPanel.Controls.Add(labelSKUlabel, 0, 0);
+            variableTableLayoutPanel.Dock = DockStyle.Fill;
+            variableTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            variableTableLayoutPanel.Name = "variableTableLayoutPanel";
+            variableTableLayoutPanel.RowCount = 6;
+            variableTableLayoutPanel.RowStyles.Add(new RowStyle());
+            variableTableLayoutPanel.RowStyles.Add(new RowStyle());
+            variableTableLayoutPanel.RowStyles.Add(new RowStyle());
+            variableTableLayoutPanel.RowStyles.Add(new RowStyle());
+            variableTableLayoutPanel.RowStyles.Add(new RowStyle());
+            variableTableLayoutPanel.RowStyles.Add(new RowStyle());
+            variableTableLayoutPanel.Size = new System.Drawing.Size(320, 374);
+            variableTableLayoutPanel.TabIndex = 20;
+            // 
+            // printerFeedPathLabel
+            // 
+            printerFeedPathLabel.AutoSize = true;
+            printerFeedPathLabel.Dock = DockStyle.Fill;
+            printerFeedPathLabel.Location = new System.Drawing.Point(6, 131);
+            printerFeedPathLabel.Name = "printerFeedPathLabel";
+            printerFeedPathLabel.Size = new System.Drawing.Size(149, 29);
+            printerFeedPathLabel.TabIndex = 26;
+            printerFeedPathLabel.Text = "Printer FeedPath:";
+            printerFeedPathLabel.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // printerFeedPathTextBox
+            // 
+            printerFeedPathTextBox.Dock = DockStyle.Fill;
+            printerFeedPathTextBox.Location = new System.Drawing.Point(164, 134);
+            printerFeedPathTextBox.Name = "printerFeedPathTextBox";
+            printerFeedPathTextBox.PlaceholderText = "Printer FeedPath";
+            printerFeedPathTextBox.Size = new System.Drawing.Size(150, 23);
+            printerFeedPathTextBox.TabIndex = 25;
             // 
             // sampleTextBox
             // 
@@ -151,41 +171,21 @@
             labelSKUlabel.Text = "Sample:";
             labelSKUlabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // printerFeedPathLabel
-            // 
-            printerFeedPathLabel.AutoSize = true;
-            printerFeedPathLabel.Dock = DockStyle.Fill;
-            printerFeedPathLabel.Location = new System.Drawing.Point(6, 131);
-            printerFeedPathLabel.Name = "printerFeedPathLabel";
-            printerFeedPathLabel.Size = new System.Drawing.Size(149, 29);
-            printerFeedPathLabel.TabIndex = 26;
-            printerFeedPathLabel.Text = "Printer FeedPath:";
-            printerFeedPathLabel.TextAlign = ContentAlignment.MiddleCenter;
-            // 
-            // printerFeedPathTextBox
-            // 
-            printerFeedPathTextBox.Dock = DockStyle.Fill;
-            printerFeedPathTextBox.Location = new System.Drawing.Point(164, 134);
-            printerFeedPathTextBox.Name = "printerFeedPathTextBox";
-            printerFeedPathTextBox.PlaceholderText = "Printer FeedPath";
-            printerFeedPathTextBox.Size = new System.Drawing.Size(150, 23);
-            printerFeedPathTextBox.TabIndex = 25;
-            // 
             // VariableDefinitionsView
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(tableLayoutPanel1);
+            Controls.Add(variableTableLayoutPanel);
             Name = "VariableDefinitionsView";
             Size = new System.Drawing.Size(320, 374);
-            tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel1.PerformLayout();
+            variableTableLayoutPanel.ResumeLayout(false);
+            variableTableLayoutPanel.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel variableTableLayoutPanel;
         private TextBox sampleTextBox;
         private TextBox sampleReferenceTextBox;
         private TextBox consumeableTextBox;

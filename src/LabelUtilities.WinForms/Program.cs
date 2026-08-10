@@ -5,6 +5,7 @@ using Application = System.Windows.Forms.Application;
 using LabelUtilities.Core.Models;
 using LabelUtilities.Core.Services;
 using LabelUtilities.WinForms.Views;
+using LabelUtilities.WinForms.ViewModels;
 
 
 namespace LabelUtilities.WinForms
@@ -33,7 +34,7 @@ namespace LabelUtilities.WinForms
                 .ConfigureServices((context, services) =>
                 {
                     services.AddTransient<MainView>();
-                    services.AddSingleton<ISGDCommandListService, SGDCommandListService>();
+                    services.AddTransient<MainViewModel>();
                 });
         }
     }

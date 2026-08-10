@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace LabelUtilities.WinForms.Views
 {
-    public partial class VariableDefinitionsView : UserControl
+    public partial class VariableSettingsView : UserControl
     {
-        public VariableDefinitionsView()
+        public VariableSettingsView()
         {
             InitializeComponent();
         }

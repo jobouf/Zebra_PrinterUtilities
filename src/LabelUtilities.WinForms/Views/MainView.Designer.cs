@@ -33,7 +33,7 @@ namespace LabelUtilities.WinForms.Views
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             mainToolStrip = new ToolStrip();
             printerlistToolStripComboBox = new ToolStripComboBox();
-            toolStripButtonDiscoverPrinters = new ToolStripButton();
+            discoverPrintersToolStripButton = new ToolStripButton();
             startProfileToolStripButton = new ToolStripButton();
             mainMenuStrip = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
@@ -66,19 +66,19 @@ namespace LabelUtilities.WinForms.Views
             toolStripSeparator4 = new ToolStripSeparator();
             selectAllToolStripMenuItem = new ToolStripMenuItem();
             mainStatusStrip = new StatusStrip();
-            mainToolStripProgressBar = new ToolStripProgressBar();
-            mainToolStripStatusLabel = new ToolStripStatusLabel();
+            mainProgressToolStripProgressBar = new ToolStripProgressBar();
+            mainStatusToolStripStatusLabel = new ToolStripStatusLabel();
             splitContainer1 = new SplitContainer();
             splitContainer2 = new SplitContainer();
             tabControl2 = new TabControl();
             variableTabPage = new TabPage();
-            variableDefinitionsView2 = new VariableDefinitionsView();
-            variableDefinitionsView1 = new VariableDefinitionsView();
+            variableDefinitionsView2 = new VariableSettingsView();
+            variableDefinitionsView1 = new VariableSettingsView();
             printerSettingsTabPage = new TabPage();
+            printerSettingsView1 = new PrinterSettingsView();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
             tabPage2 = new TabPage();
-            printerSettingsView1 = new PrinterSettingsView();
             mainToolStrip.SuspendLayout();
             mainMenuStrip.SuspendLayout();
             mainStatusStrip.SuspendLayout();
@@ -97,7 +97,7 @@ namespace LabelUtilities.WinForms.Views
             // 
             // mainToolStrip
             // 
-            mainToolStrip.Items.AddRange(new ToolStripItem[] { printerlistToolStripComboBox, toolStripButtonDiscoverPrinters, startProfileToolStripButton });
+            mainToolStrip.Items.AddRange(new ToolStripItem[] { printerlistToolStripComboBox, discoverPrintersToolStripButton, startProfileToolStripButton });
             mainToolStrip.Location = new System.Drawing.Point(0, 24);
             mainToolStrip.Name = "mainToolStrip";
             mainToolStrip.Size = new Size(800, 25);
@@ -111,15 +111,14 @@ namespace LabelUtilities.WinForms.Views
             printerlistToolStripComboBox.Size = new Size(200, 25);
             printerlistToolStripComboBox.Text = "Select Printer";
             // 
-            // toolStripButtonDiscoverPrinters
+            // discoverPrintersToolStripButton
             // 
-            toolStripButtonDiscoverPrinters.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButtonDiscoverPrinters.Image = (System.Drawing.Image)resources.GetObject("toolStripButtonDiscoverPrinters.Image");
-            toolStripButtonDiscoverPrinters.ImageTransparentColor = System.Drawing.Color.Magenta;
-            toolStripButtonDiscoverPrinters.Name = "toolStripButtonDiscoverPrinters";
-            toolStripButtonDiscoverPrinters.Size = new Size(23, 22);
-            toolStripButtonDiscoverPrinters.Text = "toolStripButtonDiscoverPrinters";
-            toolStripButtonDiscoverPrinters.Click += toolStripButtonDiscoverPrinters_Click;
+            discoverPrintersToolStripButton.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            discoverPrintersToolStripButton.Image = (System.Drawing.Image)resources.GetObject("discoverPrintersToolStripButton.Image");
+            discoverPrintersToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            discoverPrintersToolStripButton.Name = "discoverPrintersToolStripButton";
+            discoverPrintersToolStripButton.Size = new Size(23, 22);
+            discoverPrintersToolStripButton.Text = "discoverPrintersToolStripButton";
             // 
             // startProfileToolStripButton
             // 
@@ -129,7 +128,6 @@ namespace LabelUtilities.WinForms.Views
             startProfileToolStripButton.Name = "startProfileToolStripButton";
             startProfileToolStripButton.Size = new Size(23, 22);
             startProfileToolStripButton.Text = "startProfileToolStripButton";
-            startProfileToolStripButton.Click += toolStripButtonStartProfile_Click;
             // 
             // mainMenuStrip
             // 
@@ -335,23 +333,22 @@ namespace LabelUtilities.WinForms.Views
             // 
             // mainStatusStrip
             // 
-            mainStatusStrip.Items.AddRange(new ToolStripItem[] { mainToolStripProgressBar, mainToolStripStatusLabel });
+            mainStatusStrip.Items.AddRange(new ToolStripItem[] { mainProgressToolStripProgressBar, mainStatusToolStripStatusLabel });
             mainStatusStrip.Location = new System.Drawing.Point(0, 428);
             mainStatusStrip.Name = "mainStatusStrip";
             mainStatusStrip.Size = new Size(800, 22);
             mainStatusStrip.TabIndex = 3;
             mainStatusStrip.Text = "statusStrip1";
             // 
-            // mainToolStripProgressBar
+            // mainProgressToolStripProgressBar
             // 
-            mainToolStripProgressBar.Name = "mainToolStripProgressBar";
-            mainToolStripProgressBar.Size = new Size(100, 16);
+            mainProgressToolStripProgressBar.Name = "mainProgressToolStripProgressBar";
+            mainProgressToolStripProgressBar.Size = new Size(100, 16);
             // 
-            // mainToolStripStatusLabel
+            // mainStatusToolStripStatusLabel
             // 
-            mainToolStripStatusLabel.Name = "mainToolStripStatusLabel";
-            mainToolStripStatusLabel.Size = new Size(141, 17);
-            mainToolStripStatusLabel.Text = "mainToolStripStatusLabel";
+            mainStatusToolStripStatusLabel.Name = "mainStatusToolStripStatusLabel";
+            mainStatusToolStripStatusLabel.Size = new Size(0, 17);
             // 
             // splitContainer1
             // 
@@ -433,6 +430,14 @@ namespace LabelUtilities.WinForms.Views
             printerSettingsTabPage.TabIndex = 1;
             printerSettingsTabPage.Text = "Printer Settings";
             // 
+            // printerSettingsView1
+            // 
+            printerSettingsView1.Dock = DockStyle.Fill;
+            printerSettingsView1.Location = new System.Drawing.Point(3, 3);
+            printerSettingsView1.Name = "printerSettingsView1";
+            printerSettingsView1.Size = new Size(337, 232);
+            printerSettingsView1.TabIndex = 0;
+            // 
             // tabControl1
             // 
             tabControl1.Controls.Add(tabPage1);
@@ -463,14 +468,6 @@ namespace LabelUtilities.WinForms.Views
             tabPage2.Size = new Size(437, 238);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "tabPage2";
-            // 
-            // printerSettingsView1
-            // 
-            printerSettingsView1.Dock = DockStyle.Fill;
-            printerSettingsView1.Location = new System.Drawing.Point(3, 3);
-            printerSettingsView1.Name = "printerSettingsView1";
-            printerSettingsView1.Size = new Size(337, 232);
-            printerSettingsView1.TabIndex = 0;
             // 
             // MainView
             // 
@@ -508,7 +505,7 @@ namespace LabelUtilities.WinForms.Views
         #endregion
 
         private ToolStrip mainToolStrip;
-        private ToolStripButton toolStripButtonDiscoverPrinters;
+        private ToolStripButton discoverPrintersToolStripButton;
         private ToolStripButton startProfileToolStripButton;
         private MenuStrip mainMenuStrip;
         private ToolStripMenuItem fileToolStripMenuItem;
@@ -541,15 +538,15 @@ namespace LabelUtilities.WinForms.Views
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripMenuItem aboutToolStripMenuItem;
         private StatusStrip mainStatusStrip;
-        private ToolStripStatusLabel mainToolStripStatusLabel;
+        private ToolStripStatusLabel mainStatusToolStripStatusLabel;
         private ToolStripComboBox printerlistToolStripComboBox;
-        private ToolStripProgressBar mainToolStripProgressBar;
+        private ToolStripProgressBar mainProgressToolStripProgressBar;
         private SplitContainer splitContainer1;
         private SplitContainer splitContainer2;
         private TabControl tabControl2;
         private TabPage variableTabPage;
-        private VariableDefinitionsView variableDefinitionsView2;
-        private VariableDefinitionsView variableDefinitionsView1;
+        private VariableSettingsView variableDefinitionsView2;
+        private VariableSettingsView variableDefinitionsView1;
         private TabPage printerSettingsTabPage;
         private TabControl tabControl1;
         private TabPage tabPage1;
